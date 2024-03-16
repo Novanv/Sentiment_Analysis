@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+
+
+
+    <div id ="content">
+        
+        <h1>Nhận diện cảm xúc bình luận</h1>
+    
+        <form id="sentimentForm">
+            <label for="comment">Nhập bình luận:</label>
+            <textarea id="comment" name="comment"></textarea>
+            <div class="emoji-container" id="thumbs-up" onclick="moveEmoji('thumbs-up')">&#128077;</div>
+            <div class="emoji-container" id="heart" onclick="moveEmoji('heart')">&#10084;</div>
+            <div class="emoji-container" id="grinning-face" onclick="moveEmoji('grinning-face')">&#128518;</div>
+            <div class="emoji-container" id="crying-face" onclick="moveEmoji('crying-face')">&#128557;</div>
+            <div class="emoji-container" id="pouting-face" onclick="moveEmoji('pouting-face')">&#128545;</div>
+            <div class="emoji-container" id="face-vomiting" onclick="moveEmoji('face-vomiting')">&#x1F92E;</div>
+            <input type="button" value="Nhận diện" onclick="predictSentiment()">
+        </form>
+ 
+        <div id="historyContainer"></div>
+        
+        <div id="loading">Đang xử lý...</div>
+        <div id="resultContainer"></div>
+        
+    </div>
+
+
+
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+
+</body>
+</html>
